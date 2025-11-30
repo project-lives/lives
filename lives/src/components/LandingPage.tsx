@@ -47,6 +47,7 @@ const features = [
   },
   {
     title: "What have we achieved so far?",
+    useCheckboxes: true,
     subtitle: "In our weekly Minecraft sessions, students have:",
     img: "/images/achieve.png",
     description: [
@@ -57,6 +58,7 @@ const features = [
   },
   {
     title: "What other games can I join?",
+    useCheckboxes: true,
     img: "/images/games.png",
     description: [
       "Among Us",
@@ -125,6 +127,7 @@ export default function LandingPage() {
                 content={feature.description}
                 subtitle={feature.subtitle}
                 reverse={feature.reverse}
+                useCheckboxes={feature.useCheckboxes}
               />
             </div>
           </div>

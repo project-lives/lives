@@ -191,11 +191,19 @@
 }
 
 .feature-list-item::before {
+  color: white;
   content: "•";
   position: absolute;
   left: 0;
   font-weight: bold;
-  color: var(--dark-bg);
+  margin-top: -1px;
+}
+
+.feature-list.checkboxes .feature-list-item::before {
+  color: white;
+  content: "✓";
+  font-size: 1.2em;
+  margin-top: -4px;
 }
 
 .feature-list.reverse .feature-list-item {
