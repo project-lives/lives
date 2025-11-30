@@ -8,7 +8,6 @@ This is a Next.js project with TypeScript and Tailwind CSS, featuring a landing 
 
 - **Framework**: Next.js 16
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
 - **Package Manager**: npm
 
 ## Project Structure
@@ -29,39 +28,17 @@ lives/
 
 ## Development
 
-### Running the Development Server
+## Code practices
 
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the project.
-
-### Building for Production
-
-```bash
-npm run build
-npm start
-```
-
-## Features
-
-The landing page includes:
-
-- Hero section with navigation bar
-- Six feature sections:
-  - Active Pauses
-  - Safe Conversations
-  - Zero Bullying Policy
-  - Multicultural Friends
-  - Communication with Families
-  - Open Communication
+1. Prioritise code readability and maintainability.
+2. Make sure components are reusable where possible.
+3. If component is not re-usable but has complicated logic => Make a compoment anyway for better separation of concerns.
+4. Use TypeScript types and interfaces to ensure type safety.
 
 ## Design
 
-The design is based on a Figma file and uses:
+During development and implementation of design:
 
-- Dark background (#1a1a1a)
-- White borders and text
-- Arimo font family
-- Responsive layout with centered content
+1. Prioritize responsiveness and accessibility.
+2. Use native CSS over tailwind utilities when necessary for better control.
+3. If you can see a possibility for common variable or class extraction, do it.

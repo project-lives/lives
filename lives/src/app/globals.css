@@ -3,13 +3,26 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --dark-bg: #1a1a1a;
+  --border-width: 3px;
+  --border-radius: 5px;
+  --feature-icon-size: 256px;
+  --icon-size: 96px;
+  --max-content-width: 1280px;
+  --feature-gap: 2rem;
+  --content-padding: 2.5rem;
+  --nav-button-padding: 1.5rem 1rem;
+  --text-body: 16px;
+  --text-heading: 20px;
+  --line-height-body: 1.625;
+  --line-height-heading: 1.5;
+  --text-muted: rgba(0, 0, 0, 0.8);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-helios-extended);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +35,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-helios-extended), system-ui, sans-serif;
 }
