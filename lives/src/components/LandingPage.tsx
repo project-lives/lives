@@ -131,7 +131,10 @@ export default function LandingPage() {
             className={`feature ${feature.reverse ? "reverse" : ""}`}
           >
             <div className="feature-icon">
-              <img alt={`${feature.title} Icon`} src={feature.img || imgIcon} />
+              <img
+                alt={`${feature.title} Icon`}
+                src={getAssetPath(feature.img) || imgIcon}
+              />
             </div>
             <div className="feature-content">
               <h2 className="feature-title">{feature.title}</h2>

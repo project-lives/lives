@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
+import { getAssetPath } from "@/utils/assets"
 
 const heliosExtended = localFont({
   src: [
@@ -29,15 +30,14 @@ const heliosExtended = localFont({
   display: "swap",
 })
 
+const imgFavIcon = getAssetPath("/images/favicon.svg")
+
 export const metadata: Metadata = {
   title: "LIVES",
   description: "LIVES - Learn English with the help of videogames.",
   icons: {
-    icon: [
-      { url: "/images/favicon.svg", type: "image/svg+xml" },
-      { url: "/images/favicon.svg" },
-    ],
-    apple: "/images/favicon.svg",
+    icon: [{ url: imgFavIcon, type: "image/svg+xml" }, { url: imgFavIcon }],
+    apple: imgFavIcon,
   },
 }
 
