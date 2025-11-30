@@ -1,6 +1,7 @@
 import Image from "next/image"
 import "./landing-page.css"
 import FeatureDescription from "./FeatureDescription"
+import { getAssetPath } from "@/utils/assets"
 
 const imgWhatsAppImage = "/images/banner.svg"
 const imgIcon = "/images/landing-page/icon-placeholder.png"
@@ -86,7 +87,7 @@ export default function LandingPage() {
           <Image
             alt="Hero background"
             className="hero-image"
-            src={imgWhatsAppImage}
+            src={getAssetPath(imgWhatsAppImage)}
             width={435}
             height={213}
           />
