@@ -9,10 +9,10 @@ const imgIcon = "/images/landing-page/icon-placeholder.png"
 
 const navItems = [
   { label: "Home", active: true },
+  { label: "Contact us", href: "#footer" },
   { label: "About Us", comingSoon: true },
   { label: "Services", comingSoon: true },
   { label: "Our Adventures", comingSoon: true },
-  { label: "Contact us", comingSoon: true },
   { label: "Try for Free", comingSoon: true },
   { label: "Language", comingSoon: true },
 ]
@@ -86,18 +86,30 @@ export default function LandingPage() {
       {/* Hero Section */}
       <header className="hero-section">
         <nav className="navigation">
-          {navItems.map((item, index) => (
-            <button
-              key={index}
-              className={`nav-button ${item.active ? "active" : ""} ${
-                item.comingSoon ? "coming-soon" : ""
-              }`}
-              disabled={item.comingSoon}
-            >
-              {item.label}
-              {item.comingSoon && <span className="badge">Coming Soon</span>}
-            </button>
-          ))}
+          {navItems.map((item, index) => {
+            const className = `nav-button ${item.active ? "active" : ""} ${
+              item.comingSoon ? "coming-soon" : ""
+            }`
+
+            if (item.href) {
+              return (
+                <a key={index} href={item.href} className={className}>
+                  {item.label}
+                </a>
+              )
+            }
+
+            return (
+              <button
+                key={index}
+                className={className}
+                disabled={item.comingSoon}
+              >
+                {item.label}
+                {item.comingSoon && <span className="badge">Coming Soon</span>}
+              </button>
+            )
+          })}
         </nav>
 
         <div className="hero-image-container">
@@ -133,6 +145,23 @@ export default function LandingPage() {
           </div>
         ))}
       </section>
+
+      {/* Footer Section */}
+      <footer id="footer" className="footer-section">
+        <div className="footer-content">
+          <h2 className="footer-title">Get in Touch</h2>
+          <p className="footer-description">
+            Have questions or want to join our community? We&apos;d love to hear
+            from you!
+          </p>
+          <a
+            href="mailto:project.lives.project@gmail.com"
+            className="footer-email"
+          >
+            project.lives.project@gmail.com
+          </a>
+        </div>
+      </footer>
     </div>
   )
 }
