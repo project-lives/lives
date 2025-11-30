@@ -58,6 +58,7 @@ const features = [
       "Check our link in bio or scan QR code to join our waiting list",
       "Let’s learn by playing. Let’s learn by living",
     ],
+    img: "/images/qr-code.png",
   },
 ]
 
@@ -100,12 +101,7 @@ export default function LandingPage() {
             className={`feature ${feature.reverse ? "reverse" : ""}`}
           >
             <div className="feature-icon">
-              <Image
-                alt={`${feature.title} Icon`}
-                src={imgIcon}
-                width={96}
-                height={96}
-              />
+              <img alt={`${feature.title} Icon`} src={feature.img || imgIcon} />
             </div>
             <div className="feature-content">
               <h2 className="feature-title">{feature.title}</h2>
