@@ -2,6 +2,7 @@ import Image from "next/image"
 import "./landing-page.css"
 import FeatureDescription from "./FeatureDescription"
 import { getAssetPath } from "@/utils/assets"
+import { title } from "process"
 
 const imgWhatsAppImage = "/images/banner.svg"
 const imgIcon = "/images/landing-page/icon-placeholder.png"
@@ -19,6 +20,7 @@ const navItems = [
 const features = [
   {
     title: "What is LIVES?",
+    img: "/images/what.png",
     description:
       "A Helsinki-based project that teaches English through collaborative gaming. We use video games such as Minecraft to help learners communicate, create, and solve problems in English.",
   },
@@ -30,11 +32,23 @@ const features = [
       "Anyone who loves games and wants to improve their communication skills.",
       "Families seeking safe online spaces  for their kids.",
     ],
+    img: "/images/who.png",
     reverse: true,
+  },
+  {
+    title: "How does it work?",
+    img: "/images/how.png",
+    description: [
+      "Sign up to our service",
+      "Play, build, explore, and collaborate with peers",
+      "Use English in engaging, authentic, and interactive settings",
+      "Speak, listen, and learn naturally without pressure",
+    ],
   },
   {
     title: "What have we achieved so far?",
     subtitle: "In our weekly Minecraft sessions, students have:",
+    img: "/images/achieve.png",
     description: [
       "Engaged in intercultural and multilingual digital learning environment",
       "Practiced English naturally — often without even realizing it",
@@ -43,6 +57,7 @@ const features = [
   },
   {
     title: "What other games can I join?",
+    img: "/images/games.png",
     description: [
       "Among Us",
       "Counter-Strike 2",
