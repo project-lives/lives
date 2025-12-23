@@ -1,8 +1,29 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Local Development Setup
 
-First, run the development server:
+### Prerequisites
+- Node.js v20.18.1
+
+Verify Node.js installation:
+```bash
+node -v
+```
+
+
+### Installation
+
+Clone the repository and navigate to the frontend project directory:
+
+git clone https://github.com/project-lives/lives.git
+cd lives/lives
+
+Install dependencies:
+
+npm install
+
+
+Run the development server:
 
 ```bash
 npm run dev
