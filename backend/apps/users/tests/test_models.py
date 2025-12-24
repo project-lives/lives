@@ -22,6 +22,7 @@ class TestUserModel:
         
         assert user.email == email
         assert user.check_password(password)
+        assert user.password != password  # Password should be hashed
         assert user.is_active is True
         assert user.is_staff is False
         assert user.is_superuser is False
