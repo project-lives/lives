@@ -2,110 +2,124 @@
 
 Django backend application with Django REST Framework and PostgreSQL.
 
-Database is running in a docker image, so make sure Docker is installed and is running on your machine.
+## Prerequisites
 
-Also install python 3.11 or greater.
+- Python 3.11 or higher
+- [uv](https://pypi.org/project/uv/) package manager
+- Docker (for PostgreSQL)
 
-## Setup
+## Quick Start
 
-1. Install uv (Python package manager):
+1. **Install dependencies:**
 
-```bash
-pip install uv
-```
+   ```bash
+   cd backend
+   make install
+   ```
 
-2. Install dependencies:
+2. **Start the database:**
 
-```bash
-uv sync --all-extras
-# OR use: make install
-```
+   ```bash
+   make db-up
+   ```
 
-3. Copy `.env.example` to `.env` and update values:
+3. **Create .env file:**
 
-```bash
-cp .env.example .env
-```
+   ```bash
+   cp .env.example .env
+   # On Windows: copy .env.example .env
+   ```
 
-4. Start PostgreSQL with Docker:
+4. **Run migrations:**
 
-```bash
-docker-compose up -d
-# OR use: make db-up
-```
+   ```bash
+   make makemigrations
+   make migrate
+   ```
 
-5. Run database migrations:
+5. **Create a superuser:**
 
-```bash
-uv run python manage.py migrate
-# OR use: make migrate
-```
+   ```bash
+   make createsuperuser
+   ```
 
-6. Create a superuser (optional):
+6. **Start the development server:**
+   ```bash
+   make dev
+   ```
 
-```bash
-uv run python manage.py createsuperuser
-# OR use: make createsuperuser
-```
+The API will be available at: http://localhost:8000/  
+Admin interface at: http://localhost:8000/admin/
 
-7. Run the application:
+## Development
 
-```bash
-uv run python manage.py runserver
-# OR use: make dev
-```
+### Database Migrations
 
-The API will be available at http://localhost:8000/
-Admin interface will be at http://localhost:8000/admin/
-
-## Database Migrations
-
-This project uses Django's built-in migration system:
-
-**Create new migrations:**
+Create new migrations after model changes:
 
 ```bash
 make makemigrations
 ```
 
-**Apply migrations:**
+Apply migrations to database:
 
 ```bash
 make migrate
 ```
 
-## Testing
+### Testing
 
-Run tests with pytest:
-
-```bash
-uv run pytest
-# OR use: make test
-```
-
-Run tests with coverage:
+Run all tests:
 
 ```bash
-uv run pytest --cov=apps --cov-report=html
-# OR use: make test-cov
+make test
 ```
 
-## Makefile Commands
+Run tests with coverage report:
 
-- `make dev` - Start development server
-- `make test` - Run tests
-- `make test-cov` - Run tests with coverage
-- `make db-up` - Start PostgreSQL
-- `make db-down` - Stop PostgreSQL
-- `make migrate` - Apply database migrations
-- `make makemigrations` - Create new migrations
-- `make shell` - Open Django shell
-- `make createsuperuser` - Create a superuser
-- `make clean` - Clean cache files
+```bash
+make test-cov
+```
+
+### Other Commands
+
+Open Django shell:
+
+```bash
+make shell
+```
+
+Stop the database:
+
+```bash
+make db-down
+```
+
+Clean cache files:
+
+```bash
+make clean
+```
+
+## Available Make Commands
+
+| Command                | Description               |
+| ---------------------- | ------------------------- |
+| `make dev`             | Start development server  |
+| `make test`            | Run tests                 |
+| `make test-cov`        | Run tests with coverage   |
+| `make db-up`           | Start PostgreSQL          |
+| `make db-down`         | Stop PostgreSQL           |
+| `make migrate`         | Apply database migrations |
+| `make makemigrations`  | Create new migrations     |
+| `make shell`           | Open Django shell         |
+| `make createsuperuser` | Create a superuser        |
+| `make install`         | Install dependencies      |
+| `make clean`           | Clean cache files         |
+
 - `make migrate-down` - Rollback migration
 - `make migrate-current` - Show current migration
 - `make install` - Install dependencies
-- `make clean` - Clean cache files
 
 ## API Documentation
 
