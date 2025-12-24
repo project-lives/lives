@@ -1,26 +1,27 @@
-.PHONY: help dev test db-up db-down install clean migrate-create migrate-up migrate-down migrate-current
+.PHONY: help dev test db-up db-down install clean migrate makemigrations shell createsuperuser
 
 help:
 	@echo "Available commands:"
 	@echo "  make dev              - Start development server"
 	@echo "  make test             - Run tests"
+	@echo "  make test-cov         - Run tests with coverage"
 	@echo "  make db-up            - Start PostgreSQL with Docker"
 	@echo "  make db-down          - Stop PostgreSQL"
 	@echo "  make install          - Install dependencies"
-	@echo "  make migrate-create   - Create a new migration (use MSG='description')"
-	@echo "  make migrate-up       - Apply all pending migrations"
-	@echo "  make migrate-down     - Rollback last migration"
-	@echo "  make migrate-current  - Show current migration version"
+	@echo "  make migrate          - Apply database migrations"
+	@echo "  make makemigrations   - Create new migrations"
+	@echo "  make shell            - Open Django shell"
+	@echo "  make createsuperuser  - Create a superuser"
 	@echo "  make clean            - Clean cache files"
 
 dev:
-	uv run uvicorn app.main:app --reload
+	uv run python manage.py runserver
 
 test:
 	uv run pytest
 
 test-cov:
-	uv run pytest --cov=app --cov-report=html
+	uv run pytest --cov=apps --cov-report=html
 
 db-up:
 	docker-compose up -d
@@ -31,22 +32,17 @@ db-down:
 install:
 	uv sync --all-extras
 
-migrate-create:
-	@if [ -z "$(MSG)" ]; then \
-		echo "Error: Please provide a migration message with MSG='description'"; \
-		echo "Example: make migrate-create MSG='add users table'"; \
-		exit 1; \
-	fi
-	uv run alembic revision --autogenerate -m "$(MSG)"
+migrate:
+	uv run python manage.py migrate
 
-migrate-up:
-	uv run alembic upgrade head
+makemigrations:
+	uv run python manage.py makemigrations
 
-migrate-down:
-	uv run alembic downgrade -1
+shell:
+	uv run python manage.py shell
 
-migrate-current:
-	uv run alembic current
+createsuperuser:
+	uv run python manage.py createsuperuser
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} +

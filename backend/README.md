@@ -1,6 +1,6 @@
 # Backend API
 
-FastAPI backend application with PostgreSQL and SQLAlchemy.
+Django backend application with Django REST Framework and PostgreSQL.
 
 Database is running in a docker image, so make sure Docker is installed and is running on your machine.
 
@@ -17,7 +17,8 @@ pip install uv
 2. Install dependencies:
 
 ```bash
-uv sync
+uv sync --all-extras
+# OR use: make install
 ```
 
 3. Copy `.env.example` to `.env` and update values:
@@ -30,53 +31,52 @@ cp .env.example .env
 
 ```bash
 docker-compose up -d
+# OR use: make db-up
 ```
 
 5. Run database migrations:
 
 ```bash
-uv run alembic upgrade head
-# OR use: make migrate-up
+uv run python manage.py migrate
+# OR use: make migrate
 ```
 
-6. Run the application:
+6. Create a superuser (optional):
 
 ```bash
-uv run uvicorn app.main:app --reload
+uv run python manage.py createsuperuser
+# OR use: make createsuperuser
+```
+
+7. Run the application:
+
+```bash
+uv run python manage.py runserver
 # OR use: make dev
 ```
 
+The API will be available at http://localhost:8000/
+Admin interface will be at http://localhost:8000/admin/
+
 ## Database Migrations
 
-This project uses Alembic for database migrations:
+This project uses Django's built-in migration system:
 
-**Create a new migration:**
+**Create new migrations:**
 
 ```bash
-make migrate-create MSG="add new column to users"
+make makemigrations
 ```
 
 **Apply migrations:**
 
 ```bash
-make migrate-up
-```
-
-**Rollback last migration:**
-
-```bash
-make migrate-down
-```
-
-**Check current version:**
-
-```bash
-make migrate-current
+make migrate
 ```
 
 ## Testing
 
-Run tests:
+Run tests with pytest:
 
 ```bash
 uv run pytest
@@ -86,7 +86,7 @@ uv run pytest
 Run tests with coverage:
 
 ```bash
-uv run pytest --cov=app --cov-report=html
+uv run pytest --cov=apps --cov-report=html
 # OR use: make test-cov
 ```
 
@@ -94,10 +94,14 @@ uv run pytest --cov=app --cov-report=html
 
 - `make dev` - Start development server
 - `make test` - Run tests
+- `make test-cov` - Run tests with coverage
 - `make db-up` - Start PostgreSQL
 - `make db-down` - Stop PostgreSQL
-- `make migrate-create MSG="description"` - Create new migration
-- `make migrate-up` - Apply migrations
+- `make migrate` - Apply database migrations
+- `make makemigrations` - Create new migrations
+- `make shell` - Open Django shell
+- `make createsuperuser` - Create a superuser
+- `make clean` - Clean cache files
 - `make migrate-down` - Rollback migration
 - `make migrate-current` - Show current migration
 - `make install` - Install dependencies
