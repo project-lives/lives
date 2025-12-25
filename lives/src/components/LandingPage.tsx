@@ -3,6 +3,13 @@ import "./landing-page.css"
 import FeatureDescription from "./FeatureDescription"
 import { getAssetPath } from "@/utils/assets"
 import { title } from "process"
+import { useState } from "react";
+
+const signUpLinks = {
+    en: "https://forms.gle/uwdbH6nFLM9Tzs527",
+    tr: "https://forms.gle/qnoEtL5UXQLR6vrLA",
+    es: "https://forms.gle/DNFQhHSSuMyNqFGu6",
+};
 
 const imgWhatsAppImage = "/images/banner.svg"
 const imgIcon = "/images/landing-page/icon-placeholder.png"
@@ -77,10 +84,14 @@ const features = [
       "Let’s learn by playing. Let’s learn by living",
     ],
     img: "/images/qr-code.png",
-  },
+    },
 ]
+ 
+
 
 export default function LandingPage() {
+    const [language, setLanguage] = useState<keyof typeof signUpLinks>("en");
+
   return (
     <div className="landing-page">
       {/* Hero Section */}
@@ -121,7 +132,36 @@ export default function LandingPage() {
             height={213}
           />
         </div>
-      </header>
+          </header>
+
+          
+      {/* Language Selector */}
+      <div className="language-selector">
+        <label>Select Language: </label>
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value as keyof typeof signUpLinks)}
+
+        >
+          <option value="en">English</option>
+          <option value="tr">Turkish</option>
+          <option value="es">Spanish</option>
+        </select>
+      </div>
+
+      {/* Sign Up Section */}
+      <section className="sign-up-section">
+        <h2>Sign Up</h2>
+        <p>
+          <a
+            href={signUpLinks[language]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Click here to fill in sign up form.
+          </a>
+        </p>
+      </section>
 
       {/* Features Section */}
       <section className="features-section">
