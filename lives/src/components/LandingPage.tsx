@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image"
 import "./landing-page.css"
 import FeatureDescription from "./FeatureDescription"
@@ -5,11 +7,30 @@ import { getAssetPath } from "@/utils/assets"
 import { title } from "process"
 import { useState } from "react";
 
-const signUpLinks = {
-    en: "https://forms.gle/uwdbH6nFLM9Tzs527",
-    tr: "https://forms.gle/qnoEtL5UXQLR6vrLA",
-    es: "https://forms.gle/DNFQhHSSuMyNqFGu6",
+enum Language {
+    EN = "en",
+    TR = "tr",
+    ES = "es",
+}
+
+const signUpLinks: Record<Language, string> = {
+    [Language.EN]: "https://forms.gle/uwdbH6nFLM9Tzs527",
+    [Language.TR]: "https://forms.gle/qnoEtL5UXQLR6vrLA",
+    [Language.ES]: "https://forms.gle/DNFQhHSSuMyNqFGu6",
 };
+
+const signUpText: Record<Language, string> = {
+    [Language.EN]: "Click here to fill in the sign up form.",
+    [Language.TR]: "Kayıt formunu doldurmak için buraya tıklayın.",
+    [Language.ES]: "Haz clic aquí para completar el formulario de registro.",
+};
+
+const selectLanguageLabel: Record<Language, string> = {
+    [Language.EN]: "Select Language:",
+    [Language.TR]: "Dil Seçiniz:",
+    [Language.ES]: "Seleccionar idioma:",
+};
+
 
 const imgWhatsAppImage = "/images/banner.svg"
 const imgIcon = "/images/landing-page/icon-placeholder.png"
@@ -90,7 +111,8 @@ const features = [
 
 
 export default function LandingPage() {
-    const [language, setLanguage] = useState<keyof typeof signUpLinks>("en");
+    const [language, setLanguage] = useState<Language>(Language.EN);
+
 
   return (
     <div className="landing-page">
@@ -134,34 +156,6 @@ export default function LandingPage() {
         </div>
           </header>
 
-          
-      {/* Language Selector */}
-      <div className="language-selector">
-        <label>Select Language: </label>
-        <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value as keyof typeof signUpLinks)}
-
-        >
-          <option value="en">English</option>
-          <option value="tr">Turkish</option>
-          <option value="es">Spanish</option>
-        </select>
-      </div>
-
-      {/* Sign Up Section */}
-      <section className="sign-up-section">
-        <h2>Sign Up</h2>
-        <p>
-          <a
-            href={signUpLinks[language]}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Click here to fill in sign up form.
-          </a>
-        </p>
-      </section>
 
       {/* Features Section */}
       <section className="features-section">
@@ -188,6 +182,43 @@ export default function LandingPage() {
           </div>
         ))}
       </section>
+
+          {/* Sign Up Title */}
+          <section className="sign-up-section">
+              <h2>
+                  {language === Language.TR
+                      ? "Kayıt Ol"
+                      : language === Language.ES
+                          ? "Regístrate"
+                          : "Sign Up"}
+              </h2>
+          </section>
+
+          {/* Language Selector */}
+          <div className="language-selector">
+              <label>{selectLanguageLabel[language]}</label>
+              <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value as Language)}
+              >
+                  <option value={Language.EN}>English</option>
+                  <option value={Language.TR}>Türkçe</option>
+                  <option value={Language.ES}>Español</option>
+              </select>
+          </div>
+
+          {/* Sign Up Link */}
+          <section className="sign-up-section">
+              <p>
+                  <a
+                      href={signUpLinks[language]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                  >
+                      {signUpText[language]}
+                  </a>
+              </p>
+          </section>
 
       {/* Footer Section */}
       <footer id="footer" className="footer-section">
