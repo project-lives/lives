@@ -31,6 +31,15 @@ const selectLanguageLabel: Record<Language, string> = {
     [Language.ES]: "Seleccionar idioma:",
 };
 
+const languageLabels: Record<Language, string> = {
+    [Language.EN]: "English",
+    [Language.TR]: "Türkçe",
+    [Language.ES]: "Español",
+};
+
+const languageOptions = Object.values(Language) as Language[];
+
+
 
 const imgWhatsAppImage = "/images/banner.svg"
 const imgIcon = "/images/landing-page/icon-placeholder.png"
@@ -181,10 +190,10 @@ export default function LandingPage() {
             </div>
           </div>
         ))}
-      </section>
+          </section>
 
-          {/* Sign Up Title */}
           <section className="sign-up-section">
+              {/* Sign Up Title */}
               <h2>
                   {language === Language.TR
                       ? "Kayıt Ol"
@@ -192,23 +201,21 @@ export default function LandingPage() {
                           ? "Regístrate"
                           : "Sign Up"}
               </h2>
-          </section>
 
-          {/* Language Selector */}
-          <div className="language-selector">
+              {/* Language Selector */}
               <label>{selectLanguageLabel[language]}</label>
               <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value as Language)}
               >
-                  <option value={Language.EN}>English</option>
-                  <option value={Language.TR}>Türkçe</option>
-                  <option value={Language.ES}>Español</option>
+                  {languageOptions.map((lang) => (
+                      <option key={lang} value={lang}>
+                          {languageLabels[lang]}
+                      </option>
+                  ))}
               </select>
-          </div>
 
-          {/* Sign Up Link */}
-          <section className="sign-up-section">
+              {/* Sign Up Link */}
               <p>
                   <a
                       href={signUpLinks[language]}

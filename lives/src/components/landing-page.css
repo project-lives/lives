@@ -95,6 +95,20 @@
   object-fit: cover;
 }
 
+/* Sign up Section */
+.sign-up-section {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    padding: 1rem;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+
 /* Features Section */
 .features-section {
   background-color: var(--dark-bg);
